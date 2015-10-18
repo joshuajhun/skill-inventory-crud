@@ -1,5 +1,5 @@
 class SkillInventoryApp < Sinatra::Base
-  
+
   get "/" do
     erb :dashboard
   end
@@ -30,7 +30,7 @@ class SkillInventoryApp < Sinatra::Base
 
   put '/skills/:id' do |id|
     SkillInventory.update(id.to_i, params[:skill])
-    redirect '/skills'
+    redirect "/skills/#{id}"
   end
 
   delete '/skills/:id' do |id|

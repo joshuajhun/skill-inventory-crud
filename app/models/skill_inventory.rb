@@ -12,13 +12,13 @@ class SkillInventory
   end
 
   def self.create(skill)
-    dataset.from(:skills).insert(name: skill[:name], status: task[:status])
+    dataset.from(:skills).insert(name: skill[:name], status: skill[:status])
   end
 
 
   def self.update(id, data)
-    task = dataset.from(:skills).where(:id => id)
-    task.update(:name => data[:name], :status => data[:status])
+    skill = dataset.from(:skills).where(:id => id)
+    skill.update(:name => data[:name], :status => data[:status])
   end
 
   def self.raw_skills
@@ -37,12 +37,12 @@ class SkillInventory
   end
 
   def self.find(id)
-    Skill.new(raw_skill(id))
+    skill = dataset.from(:skills).where(:id => id).to_a.first
+    Skill.new(skill)
   end
 
   def self.delete(id)
-    database.transaction do
-      database['skills'].delete_if {|skill| skill["id"] == id}
-    end
+    dataset.from(:skills).where(:id => id).delete
   end
+
 end

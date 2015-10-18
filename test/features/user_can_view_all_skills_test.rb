@@ -2,7 +2,6 @@ require_relative "../test_helper"
 
 class ViewSkillTest < FeatureTest
   def test_user_can_view_all_skill
-    skip
     visit "/"
 
     click_link("View Skills Inventory")
